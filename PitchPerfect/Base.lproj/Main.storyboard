@@ -24,6 +24,9 @@
                                     <constraint firstAttribute="height" constant="124" id="vgU-Me-MKj"/>
                                 </constraints>
                                 <state key="normal" image="Record"/>
+                                <connections>
+                                    <action selector="didTapRecordAudioButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Pm-Fm-NJt"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to record" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI9-gU-Wve">
                                 <rect key="frame" x="12" y="454" width="390" height="21"/>
@@ -38,6 +41,9 @@
                                     <constraint firstAttribute="width" constant="64" id="akF-du-p23"/>
                                 </constraints>
                                 <state key="normal" image="Stop"/>
+                                <connections>
+                                    <action selector="didTapStopRecordingButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nIO-ig-Hs1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -54,6 +60,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="HwB-JT-eJm"/>
                     <connections>
+                        <outlet property="recordButton" destination="agM-rg-aeo" id="BzZ-um-Gzo"/>
+                        <outlet property="recordingLabel" destination="zI9-gU-Wve" id="YpK-D8-CYw"/>
+                        <outlet property="stopRecordingButton" destination="4Wy-sB-oo0" id="bci-KQ-7y7"/>
                         <segue destination="KdD-Xx-609" kind="show" id="OCU-ND-wPE"/>
                     </connections>
                 </viewController>
