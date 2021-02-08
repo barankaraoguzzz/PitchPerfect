@@ -68,6 +68,7 @@ class RecordSoundsViewController: UIViewController {
         try! session.setCategory(AVAudioSession.Category.playAndRecord, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.defaultToSpeaker)
         
         try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
+        audioRecorder.delegate = self
         audioRecorder.isMeteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
@@ -79,6 +80,26 @@ class RecordSoundsViewController: UIViewController {
         try! audioSession.setActive(false)
     }
     
+    //MARK: - Overriding methods
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifier.ShowPlaySoundsSegue {
+            if let playSoundsViewController = segue.destination as? PlaySoundsViewController, let url = sender as? URL {
+                playSoundsViewController.recordedAudioUrl = url
+            }
+        }
+    }
+    
+}
+
+extension RecordSoundsViewController: AVAudioRecorderDelegate {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if flag {
+            performSegue(withIdentifier: SegueIdentifier.ShowPlaySoundsSegue, sender: audioRecorder.url)
+        }
+        else {
+            print("Sorry audio recorder can't record the voice ⚠️")
+        }
+    }
 }
 
 extension RecordSoundsViewController {
@@ -95,6 +116,10 @@ extension RecordSoundsViewController {
                 return StopRecording
             }
         }
+    }
+    
+    struct SegueIdentifier {
+        static let ShowPlaySoundsSegue = "stopRecording"
     }
     
     enum ActionType {
