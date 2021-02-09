@@ -84,7 +84,7 @@ class RecordSoundsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.ShowPlaySoundsSegue {
             if let playSoundsViewController = segue.destination as? PlaySoundsViewController, let url = sender as? URL {
-                playSoundsViewController.recordedAudioUrl = url
+                playSoundsViewController.recordedAudioURL = url
             }
         }
     }
